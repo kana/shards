@@ -19,6 +19,22 @@
     <script>
       $(function () {
         $('a[href^="https://www.flickr.com/photos/"]').each(function () {
+          function flickrPhotoUrl(p, sizeLetter) {
+            if (sizeLetter === '-') {
+              return 'https://farm' + p.farm + '.staticflickr.com/' +
+                     p.server + '/' +
+                     p.id + '_' + p.secret + '.jpg';
+            } else if (sizeLetter === 'o') {
+              return 'https://farm' + p.farm + '.staticflickr.com/' +
+                     p.server + '/' +
+                     p.id + '_' + p.originalsecret + '_o.' + p.originalformat;
+            } else {
+              return 'https://farm' + p.farm + '.staticflickr.com/' +
+                     p.server + '/' +
+                     p.id + '_' + p.secret + '_' + sizeLetter + '.jpg';
+            }
+          }
+
           var $a = $(this);
           var photo_id = $a.attr('href').replace(/.*\/(\d+)\/$/, '$1');
           $.getJSON(
@@ -33,6 +49,13 @@
             function (data) {
               if (data.stat === 'ok') {
                 $a.addClass('validFlickrPhoto');
+                var $img = $('<img>').attr({
+                  src: flickrPhotoUrl(data.photo, '-'),
+                  alt: data.photo.title._content
+                });
+                $a.attr('title', $a.text());
+                $a.empty();
+                $a.append($img);
               } else {
                 $a.addClass('invalidFlickrPhoto');
               }
