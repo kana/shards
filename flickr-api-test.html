@@ -2,6 +2,10 @@
 <html>
   <head>
     <title>Flickr API test</title>
+    <style>
+      .validFlickrPhoto {font-weight: bolder;}
+      .invalidFlickrPhoto {text-decoration: line-through underline; color: #999;}
+    </style>
   </head>
   <body>
     <dl>
@@ -14,6 +18,27 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
       $(function () {
+        $('a[href^="https://www.flickr.com/photos/"]').each(function () {
+          var $a = $(this);
+          var photo_id = $a.attr('href').replace(/.*\/(\d+)\/$/, '$1');
+          $.getJSON(
+            'https://api.flickr.com/services/rest/',
+            {
+              method: 'flickr.photos.getInfo',
+              format: 'json',
+              nojsoncallback: '1',
+              api_key: '203e3a11d79c8092eb14386f79b0a69a',
+              photo_id: photo_id
+            },
+            function (data) {
+              if (data.stat === 'ok') {
+                $a.addClass('validFlickrPhoto');
+              } else {
+                $a.addClass('invalidFlickrPhoto');
+              }
+            }
+          );
+        });
       });
     </script>
   </body>
