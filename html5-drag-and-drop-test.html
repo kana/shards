@@ -3,6 +3,11 @@
   <head>
     <title>HTML5 Drag and Drop Test</title>
     <style>
+      .gobblet {display: block; border: 1px #999 solid; text-align: center;}
+      .small {width: 2em; height: 2em; line-height: 2em; border-radius: 2em;}
+      .medium {width: 2.4em; height: 2.4em; line-height: 2.4em; border-radius: 2.4em;}
+      .black {color: #ffe; background: #000;}
+      .white {color: #000; background: #ffe;}
     </style>
   </head>
   <body>
@@ -10,7 +15,8 @@
 
     <h2>1. Make something draggable</h2>
 
-    TODO
+    <div class="small black gobblet" draggable="true">B</div>
+    <div class="medium white gobblet" draggable="true">W</div>
 
     <h2>2. Do something on drop</h2>
 
