@@ -10,21 +10,27 @@
     <h1>Scheduler</h1>
 
     <div ng-controller="SchedulerController">
-      <ul>
-        <li ng-repeat="user in users">
-          {{user.name}}:
-          <span ng-repeat="plan in user.plans">
-            <label>
-              {{plan.name}}
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th ng-repeat="plan in users[0].plans">{{plan.name}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in users">
+            <th>{{user.name}}</th>
+            <td ng-repeat="plan in user.plans">
               <select ng-model="plan.answer">
                 <option label="x" value="0">
                 <option label="?" value="1">
                 <option label="o" value="2">
               </select>
-            </label>
-          </span>
-        </li>
-      </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
       <form ng-submit="addUser()">
         <input ng-model="newUserName"  type="text" size="30"
                placeholder="New user name">
