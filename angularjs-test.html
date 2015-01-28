@@ -11,9 +11,9 @@
 
     <div ng-controller="SchedulerController">
       <ul>
-        <li ng-repeat="person in people">
-          {{person.name}}:
-          <span ng-repeat="plan in person.plans">
+        <li ng-repeat="user in users">
+          {{user.name}}:
+          <span ng-repeat="plan in user.plans">
             <label>
               {{plan.name}}
               <select ng-model="plan.answer">
@@ -22,12 +22,13 @@
                 <option label="o" value="2">
               </select>
             </label>
+          </span>
         </li>
       </ul>
-      <form ng-submit="addPerson()">
-        <input ng-model="newPersonName"  type="text" size="30"
-               placeholder="New person name">
-        <input type="submit" value="Add person">
+      <form ng-submit="addUser()">
+        <input ng-model="newUserName"  type="text" size="30"
+               placeholder="New user name">
+        <input type="submit" value="Add user">
       </form>
       <form ng-submit="addPlan()">
         <input ng-model="newPlanName"  type="text" size="30"
