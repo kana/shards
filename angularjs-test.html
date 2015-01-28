@@ -24,6 +24,11 @@
             </label>
         </li>
       </ul>
+      <form ng-submit="addPerson()">
+        <input ng-model="newPersonName"  type="text" size="30"
+               placeholder="New person name">
+        <input type="submit" value="Add person">
+      </form>
     </div>
   </body>
 </html>
