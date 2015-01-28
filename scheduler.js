@@ -14,6 +14,13 @@ angular.module('SchedulerApp', [])
       });
       $scope.newPersonName = '';
     };
+
+    $scope.addPlan = function () {
+      $scope.people.forEach(function (p) {
+        p.plans.push({name: $scope.newPlanName, answer: 0});
+      });
+      $scope.newPlanName = '';
+    };
   }]);
 
 // vim: expandtab softtabstop=2 shiftwidth=2
