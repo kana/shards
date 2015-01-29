@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in users">
+          <tr ng-repeat="user in users | orderBy:'name'">
             <th>{{user.name}}</th>
             <td ng-repeat="plan in user.plans">
               <select ng-model="plan.answer">
