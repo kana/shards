@@ -14,14 +14,14 @@
         <thead>
           <tr>
             <th></th>
-            <th ng-repeat="plan in users[0].plans">{{plan.name}}</th>
+            <th ng-repeat="plan in plans | orderBy:'id'">{{plan.name}}</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="user in users | orderBy:'name'">
             <th>{{user.name}}</th>
-            <td ng-repeat="plan in user.plans">
-              <select ng-model="plan.answer">
+            <td ng-repeat="answer in answersBy(user) | orderBy:'planId'">
+              <select ng-model="answer.ok">
                 <option label="x" value="0">
                 <option label="?" value="1">
                 <option label="o" value="2">
