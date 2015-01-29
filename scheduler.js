@@ -24,6 +24,18 @@ angular.module('SchedulerApp', [])
       });
     };
 
+    $scope.answersFor = function (plan) {
+      return $scope.answers.filter(function (a) {
+        return a.planId === plan.id;
+      });
+    };
+
+    $scope.userName = function (answer) {
+      return $scope.users.filter(function (u) {
+        return u.id === answer.userId;
+      })[0].name;
+    };
+
     $scope.addUser = function () {
       var newUserId =
         Math.max.apply(null, $scope.users.map(function (u) {return u.id;})) +

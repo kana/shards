@@ -13,14 +13,14 @@
       <table>
         <thead>
           <tr>
-            <th></th>
-            <th ng-repeat="plan in plans | orderBy:'id'">{{plan.name}}</th>
+            <th>Plan</th>
+            <th ng-repeat="user in users | orderBy:'name'">{{user.name}}</th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in users | orderBy:'name'">
-            <th>{{user.name}}</th>
-            <td ng-repeat="answer in answersBy(user) | orderBy:'planId'">
+          <tr ng-repeat="plan in plans | orderBy:'id'">
+            <th>{{plan.name}}</th>
+            <td ng-repeat="answer in answersFor(plan) | orderBy:userName">
               <select ng-model="answer.ok">
                 <option label="x" value="0">
                 <option label="?" value="1">
