@@ -18,18 +18,6 @@ angular.module('SchedulerApp', [])
       {userId: 3, planId: 2, ok: 2}
     ];
 
-    $scope.answersBy = function (user) {
-      return $scope.answers.filter(function (a) {
-        return a.userId === user.id;
-      });
-    };
-
-    $scope.answersFor = function (plan) {
-      return $scope.answers.filter(function (a) {
-        return a.planId === plan.id;
-      });
-    };
-
     $scope.userName = function (answer) {
       return $scope.users.filter(function (u) {
         return u.id === answer.userId;

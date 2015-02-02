@@ -20,7 +20,7 @@
         <tbody>
           <tr ng-repeat="plan in plans | orderBy:'id'">
             <th>{{plan.name}}</th>
-            <td ng-repeat="answer in answersFor(plan) | orderBy:userName">
+            <td ng-repeat="answer in answers | filter:{planId: plan.id} | orderBy:userName">
               <select ng-model="answer.ok">
                 <option label="x" value="0">
                 <option label="?" value="1">
