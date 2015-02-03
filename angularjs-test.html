@@ -14,12 +14,18 @@
         <thead>
           <tr>
             <th>Plan</th>
+            <th>o</th>
+            <th>?</th>
+            <th>x</th>
             <th ng-repeat="user in users | orderBy:'name'">{{user.name}}</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="plan in plans | orderBy:'id'">
             <th>{{plan.name}}</th>
+            <td>{{(answers | filter:{planId: plan.id, ok:2}).length}}</td>
+            <td>{{(answers | filter:{planId: plan.id, ok:1}).length}}</td>
+            <td>{{(answers | filter:{planId: plan.id, ok:0}).length}}</td>
             <td ng-repeat="answer in answers | filter:{planId: plan.id} | orderBy:userName">
               <select ng-model="answer.ok">
                 <option label="x" value="0">
