@@ -51,6 +51,12 @@ angular.module('SchedulerApp', [])
       });
       $scope.newPlanName = '';
     };
+
+    $scope.movePlan = function (plan, direction) {
+      var i = $scope.plans.indexOf(plan);
+      $scope.plans.splice(i, 1);
+      $scope.plans.splice(i + direction, 0, plan);
+    };
   }]);
 
 // vim: expandtab softtabstop=2 shiftwidth=2

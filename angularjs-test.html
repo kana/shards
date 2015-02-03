@@ -13,6 +13,7 @@
       <table>
         <thead>
           <tr>
+            <th></th>
             <th>Plan</th>
             <th>o</th>
             <th>?</th>
@@ -21,7 +22,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="plan in plans | orderBy:'id'">
+          <tr ng-repeat="plan in plans">
+            <th>
+              <input type="button" value="^" ng-click="movePlan(plan, -1)">
+              <input type="button" value="v" ng-click="movePlan(plan, 1)">
+            </th>
             <th>{{plan.name}}</th>
             <td>{{(answers | filter:{planId: plan.id, ok:2}).length}}</td>
             <td>{{(answers | filter:{planId: plan.id, ok:1}).length}}</td>
