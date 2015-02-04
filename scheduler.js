@@ -13,13 +13,14 @@ angular.module('SchedulerApp', ['ngRoute'])
         redirectTo: '/events'
       });
   })
-  .controller('EventListController', function ($scope) {
+  .value('events', [
+    {id: 1, title: 'Vim workshop', createdAt: '2015-02-03T23:12:38'},
+    {id: 2, title: 'Emacs workshop', createdAt: '2015-02-03T23:12:51'},
+    {id: 3, title: 'Workshop workshop', createdAt: '2015-02-03T23:12:57'}
+  ])
+  .controller('EventListController', function ($scope, events) {
     // TODO: Load events.
-    $scope.events = [
-      {id: 1, title: 'Vim workshop', createdAt: '2015-02-03T23:12:38'},
-      {id: 2, title: 'Emacs workshop', createdAt: '2015-02-03T23:12:51'},
-      {id: 3, title: 'Workshop workshop', createdAt: '2015-02-03T23:12:57'}
-    ];
+    $scope.events = events;
   })
   .controller('EventDetailController', function ($scope, $routeParams) {
     // TODO: Load full contents of the event.
