@@ -3,6 +3,7 @@
   <head>
     <title>AngularJS test</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.min.js"></script>
     <script src="scheduler.js"></script>
     <link rel="stylesheet" href="scheduler.css">
   </head>
@@ -53,5 +54,7 @@
         <input type="submit" value="Add plan">
       </form>
     </div>
+
+    <div ng-view></div>
   </body>
 </html>

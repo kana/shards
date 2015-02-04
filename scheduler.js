@@ -1,4 +1,4 @@
-angular.module('SchedulerApp', [])
+angular.module('SchedulerApp', ['ngRoute'])
   .controller('SchedulerController', ['$scope', function ($scope) {
     $scope.users = [
       {id: 1, name: 'A'},
