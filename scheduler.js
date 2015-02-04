@@ -22,9 +22,9 @@ angular.module('SchedulerApp', ['ngRoute'])
     // TODO: Load events.
     $scope.events = events;
   })
-  .controller('EventDetailController', function ($scope, $routeParams) {
+  .controller('EventDetailController', function ($scope, $routeParams, $filter, events) {
     // TODO: Load full contents of the event.
-    $scope.event = {id: $routeParams.eventId};
+    $scope.event = $filter('filter')(events, {id: $routeParams.eventId})[0];
   })
   .controller('SchedulerController', ['$scope', function ($scope) {
     $scope.users = [
