@@ -5,6 +5,10 @@ angular.module('SchedulerApp', ['ngRoute'])
         controller: 'EventListController',
         templateUrl: 'event-list.html'
       })
+      .when('/events/:eventId', {
+        controller: 'EventDetailController',
+        templateUrl: 'event-detail.html'
+      })
       .otherwise({
         redirectTo: '/events'
       });
@@ -16,6 +20,10 @@ angular.module('SchedulerApp', ['ngRoute'])
       {id: 2, title: 'Emacs workshop', createdAt: '2015-02-03T23:12:51'},
       {id: 3, title: 'Workshop workshop', createdAt: '2015-02-03T23:12:57'}
     ];
+  })
+  .controller('EventDetailController', function ($scope, $routeParams) {
+    // TODO: Load full contents of the event.
+    $scope.event = {id: $routeParams.eventId};
   })
   .controller('SchedulerController', ['$scope', function ($scope) {
     $scope.users = [
