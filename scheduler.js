@@ -1,4 +1,22 @@
 angular.module('SchedulerApp', ['ngRoute'])
+  .config(function ($routeProvider) {
+    $routeProvider
+      .when('/events', {
+        controller: 'EventListController',
+        templateUrl: 'event-list.html'
+      })
+      .otherwise({
+        redirectTo: '/events'
+      });
+  })
+  .controller('EventListController', function ($scope) {
+    // TODO: Load events.
+    $scope.events = [
+      {id: 1, title: 'Vim workshop', createdAt: '2015-02-03T23:12:38'},
+      {id: 2, title: 'Emacs workshop', createdAt: '2015-02-03T23:12:51'},
+      {id: 3, title: 'Workshop workshop', createdAt: '2015-02-03T23:12:57'}
+    ];
+  })
   .controller('SchedulerController', ['$scope', function ($scope) {
     $scope.users = [
       {id: 1, name: 'A'},
