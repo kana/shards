@@ -17,11 +17,22 @@
           var x = snapshot.val();
           $('<li>').text(x.user + ': ' + x.message).appendTo($('#chatLog'));
         });
+        $('#login').click(function () {
+          r.authWithOAuthPopup('twitter', function (error, authData) {
+            if (error) {
+              console.log('Login Failed!', error);
+            } else {
+              console.log('Authenticated successfully with payload:', authData);
+            }
+          });
+        });
       });
     </script>
   </head>
   <body>
     <h1>Firebase test</h1>
+
+    <input id="login" type="button" value="Log in with Twitter">
 
     <input id="name" type="text" placeholder="Name">
     <input id="message" type="text" placeholder="Message">
