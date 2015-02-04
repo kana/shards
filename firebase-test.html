@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Firebase test</title>
+    <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+      $(function () {
+        var r = new Firebase('https://brilliant-inferno-6551.firebaseio.com/');
+        $('#message').keypress(function (e) {
+          if (e.keyCode == 13) {
+            r.push({user: $('#name').val(), message: $('#message').val()});
+            $('#message').val('');
+          }
+        });
+        r.on('child_added', function (snapshot) {
+          var x = snapshot.val();
+          $('<li>').text(x.user + ': ' + x.message).appendTo($('#chatLog'));
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Firebase test</h1>
+
+    <input id="name" type="text" placeholder="Name">
+    <input id="message" type="text" placeholder="Message">
+
+    <ul id="chatLog"></ul>
+  </body>
+</html>
