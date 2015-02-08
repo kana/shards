@@ -37,6 +37,8 @@
         var isLoggedIn = auth !== null;
         $('#login').toggle(!isLoggedIn);
         $('#logout').toggle(isLoggedIn);
+        if (isLoggedIn)
+          $('#name').val(auth.twitter.username);
       });
     </script>
   </head>
@@ -46,7 +48,7 @@
     <input id="login" type="button" value="Log in with Twitter">
     <input id="logout" type="button" value="Log out">
 
-    <input id="name" type="text" placeholder="Name">
+    <input id="name" type="text" placeholder="Name" readonly>
     <input id="message" type="text" placeholder="Message">
 
     <ul id="chatLog"></ul>
