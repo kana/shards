@@ -29,6 +29,12 @@
         $('#logout').click(function () {
           r.unauth();
         });
+
+        var auth = r.getAuth();
+        console.log(auth);
+        var isLoggedIn = auth !== null;
+        $('#login').toggle(!isLoggedIn);
+        $('#logout').toggle(isLoggedIn);
       });
     </script>
   </head>
