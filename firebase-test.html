@@ -26,6 +26,9 @@
             }
           });
         });
+        $('#logout').click(function () {
+          r.unauth();
+        });
       });
     </script>
   </head>
@@ -33,6 +36,7 @@
     <h1>Firebase test</h1>
 
     <input id="login" type="button" value="Log in with Twitter">
+    <input id="logout" type="button" value="Log out">
 
     <input id="name" type="text" placeholder="Name">
     <input id="message" type="text" placeholder="Message">
