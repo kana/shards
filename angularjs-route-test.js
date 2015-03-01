@@ -1,18 +1,18 @@
 angular.module('App', ['ngRoute'])
 .config(function ($routeProvider) {
   $routeProvider
-    .when('foo', {
+    .when('/foo', {
       controller: 'Partial',
       templateUrl: 'angularjs-route-test-partial.html',
       resolve: {
-        name: function () {return 'FoO';}
+        name: function () {return 'well';}
       }
     })
     .when('bar', {
       controller: 'Partial',
       templateUrl: 'angularjs-route-test-partial.html',
       resolve: {
-        name: function () {return 'bAr';}
+        name: function () {return 'broken';}
       }
     });
 })
