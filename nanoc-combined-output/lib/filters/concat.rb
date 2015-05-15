@@ -3,6 +3,6 @@ class ConcatFilter < Nanoc::Filter
   type :text
 
   def run(content, params={})
-    item.children.map {|i| i.raw_content}.join()
+    params[:items].map {|i| i.raw_content}.join()
   end
 end

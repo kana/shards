@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 compile '/stylesheets/' do
-  filter :concat
+  filter :concat, items: item.children
 end
 
 compile '*' do
