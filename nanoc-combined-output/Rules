@@ -4,11 +4,22 @@ compile '/stylesheets/' do
   filter :concat, items: item.children
 end
 
+compile '/stylesheets/explicit/' do
+  filter :concat, items: [
+    items.find {|i| i.identifier == '/stylesheets/foo/'},
+    items.find {|i| i.identifier == '/stylesheets/bar/'},
+  ]
+end
+
 compile '*' do
 end
 
 route '/stylesheets/' do
   item.identifier + 'whole.css'
+end
+
+route '/stylesheets/explicit/' do
+  '/stylesheets/explicit.css'
 end
 
 route '*' do
