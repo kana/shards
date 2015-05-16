@@ -12,5 +12,9 @@ route '/stylesheets/' do
 end
 
 route '*' do
-  item.identifier.chop + '.' + item[:extension]
+  if item[:extension]
+    item.identifier.chop + '.' + item[:extension]
+  else
+    item.identifier.chop
+  end
 end
