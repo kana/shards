@@ -1,17 +1,17 @@
-Person := Object clone
+xs := list(1, 2, 3, 4, 5)
 
-alice := Person clone
-alice name := "Alice"
-alice age := 13
+"*** map(i, v, expr)" println
+xs map(i, v, v + i) println
 
-bob := Person clone
-bob name := "Bob"
-bob age := 28
+"*** map(v, expr)" println
+xs map(v, v * v) println
 
-charles := Person clone
-charles name := "Charles"
-charles age := 79
+"*** map(expr)" println
+xs map(* 2) println
 
-people := list(alice, bob, charles)
-people select(age < 30) map(name) println
-people select(age % 2 == 1) map(name) println
+"*** map creates a new list" println
+xsd := xs map(v, v)
+(xs == xsd) println
+#==> true
+(xs isIdenticalTo(xsd)) println
+#==> false
