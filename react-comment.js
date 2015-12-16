@@ -79,6 +79,6 @@ var data = [
 ];
 
 ReactDOM.render(
-  <CommentBox url="/api/comments" />,
+  <CommentBox url="react-comment.json" />,
   document.getElementById('content')
 );
