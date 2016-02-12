@@ -10,7 +10,7 @@ fn main() {
         let f = File::open(file_path).unwrap();
         let f = BufReader::new(f);
         for line in f.lines() {
-            print!("{}", line.unwrap());
+            println!("{}", line.unwrap());
         }
     }
 }
