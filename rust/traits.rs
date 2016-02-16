@@ -52,12 +52,17 @@ impl Shape for Circle {
 //                             ^
 // traits.rs:54:16: 54:17 help: run `rustc --explain E0308` to see a detailed explanation
 // error: aborting due to 3 previous errors
-fn print_area(s: Shape) {
+// fn print_area(s: Shape) {
+//     println!("This shape has an ares of {}", s.area());
+// }
+
+// OK: Static dispatch
+fn print_area_static<T: Shape>(s: T) {
     println!("This shape has an ares of {}", s.area());
 }
 
-// OK
-fn print_area<T: Shape>(s: T) {
+// OK: Dynamic dispatch
+fn print_area_dynamic(s: &Shape) {
     println!("This shape has an ares of {}", s.area());
 }
 
@@ -74,6 +79,10 @@ fn main() {
         radius: 1.0,
     };
 
-    print_area(r);
-    print_area(c);
+    // Note that reversing the order of the following calls causes:
+    // > error: use of moved value: `r` [E0382]
+    print_area_dynamic(&r);
+    print_area_dynamic(&c);
+    print_area_static(r);
+    print_area_static(c);
 }
