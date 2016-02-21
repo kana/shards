@@ -1,5 +1,6 @@
 extern crate getopts;
 use getopts::Options;
+use std::collections::VecDeque;
 use std::env;
 use std::io::prelude::*;
 
@@ -14,8 +15,15 @@ fn main() {
         None => { 10 }
     };
 
+    let mut lines = VecDeque::with_capacity(n);
     let stdin = std::io::stdin();
-    for line in stdin.lock().lines().take(n) {
-        println!("{}", line.unwrap());
+    for line in stdin.lock().lines() {
+        lines.push_back(line.unwrap());
+        if lines.len() > n {
+            lines.pop_front();
+        }
+    }
+    for line in lines {
+        println!("{}", line);
     }
 }
