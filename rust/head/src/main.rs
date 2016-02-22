@@ -15,7 +15,8 @@ fn main() {
     };
 
     let stdin = std::io::stdin();
-    for line in stdin.lock().lines().take(n) {
+    let f: &BufRead = &stdin.lock();
+    for line in f.lines().take(n) {
         println!("{}", line.unwrap());
     }
 }
