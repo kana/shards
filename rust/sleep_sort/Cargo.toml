@@ -1,0 +1,6 @@
+[package]
+name = "sleep_sort"
+version = "0.1.0"
+authors = ["Kana Natsuno <dev@whileimautomaton.net>"]
+
+[dependencies]
