@@ -2,11 +2,11 @@ use std::io::prelude::*;
 
 fn main() {
     let stdin = std::io::stdin();
-    let mut lines = Vec::new();
 
-    for line in stdin.lock().lines() {
-        lines.push(line.unwrap());
-    }
+    let mut lines : Vec<String> =
+        stdin.lock().lines()
+        .map(|line| line.unwrap())
+        .collect();
 
     lines.sort();
     for line in lines {
