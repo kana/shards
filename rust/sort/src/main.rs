@@ -1,5 +1,9 @@
 use std::io::prelude::*;
 
+fn sort(lines: &mut Vec<String>) {
+    lines.sort();
+}
+
 fn main() {
     let stdin = std::io::stdin();
 
@@ -8,7 +12,8 @@ fn main() {
         .map(|line| line.unwrap())
         .collect();
 
-    lines.sort();
+    sort(&mut lines);
+
     for line in lines {
         println!("{}", line);
     }
