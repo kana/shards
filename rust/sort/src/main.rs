@@ -4,10 +4,18 @@ fn sort(lines: &mut Vec<String>) {
     for i in 0..lines.len() {
         for j in i..lines.len() {
             if lines[i] > lines[j] {
-                // !??!?!?!?!?!
-                unsafe {
-                    std::ptr::swap(&mut lines[i], &mut lines[j]);
-                }
+                // Typical code to swap values in other languages like:
+                //
+                //     let tmp = lines[i];
+                //     lines[i] = lines[j];
+                //     lines[j] = tmp;
+                //
+                // is not valid in Rust because of its semantics:
+                //
+                //     error: cannot move out of indexed content [E0507]
+                //            let tmp = lines[i];
+                //                      ^~~~~~~~
+                lines.swap(i, j);
             }
         }
     }
