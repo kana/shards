@@ -16,6 +16,33 @@ fn main() {
                         println!("Stack does not have enough contents!");
                     }
                 },
+                "-" => {
+                    if 2 <= stack.len() {
+                        let r = stack.pop().unwrap();
+                        let l = stack.pop().unwrap();
+                        stack.push(l - r);
+                    } else {
+                        println!("Stack does not have enough contents!");
+                    }
+                },
+                "*" => {
+                    if 2 <= stack.len() {
+                        let r = stack.pop().unwrap();
+                        let l = stack.pop().unwrap();
+                        stack.push(l * r);
+                    } else {
+                        println!("Stack does not have enough contents!");
+                    }
+                },
+                "/" => {
+                    if 2 <= stack.len() {
+                        let r = stack.pop().unwrap();
+                        let l = stack.pop().unwrap();
+                        stack.push(l / r);
+                    } else {
+                        println!("Stack does not have enough contents!");
+                    }
+                },
                 x => {
                     let n = x.parse::<i64>();
                     match n {
