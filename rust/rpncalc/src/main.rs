@@ -1,13 +1,5 @@
 use std::io::prelude::*;
 
-// Hmm:
-//
-// src/main.rs:32:33: 32:56 error: no method named `calculate` found for type `&Operator<'_>` in the current scope
-// src/main.rs:32                     for v in op.calculate(vec![&l, &r]) {
-//                                                ^~~~~~~~~~~~~~~~~~~~~~~
-// error: aborting due to previous error
-// Could not compile `rpncalc`.
-
 struct Operator<'a> {
     token: &'static str,
     arity: usize,
@@ -37,8 +29,8 @@ fn main() {
                 if op.arity <= stack.len() {
                     let r = stack.pop().unwrap();
                     let l = stack.pop().unwrap();
-                    for v in op.calculate(vec![&l, &r]) {
-                        stack.push(l + r);
+                    for v in (op.calculate)(&vec![l, r]) {
+                        stack.push(v);
                     }
                 } else {
                     println!("Stack does not have enough contents!");
