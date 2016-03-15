@@ -3,10 +3,10 @@ use std::io::prelude::*;
 struct Operator<'a> {
     token: &'static str,
     arity: usize,
-    calculate: &'a Fn(&Vec<i64>) -> Vec<i64>,
+    calculate: &'a Fn(&[i64]) -> Vec<i64>,
 }
 
-fn add(ns: &Vec<i64>) -> Vec<i64> {
+fn add(ns: &[i64]) -> Vec<i64> {
     vec![ns[0] + ns[1]]
 }
 
@@ -26,10 +26,10 @@ fn main() {
             if let Ok(n) = token.parse::<i64>() {
                 stack.push(n);
             } else if let Some(op) = operators.iter().find(|&op| op.token == token) {
-                if op.arity <= stack.len() {
-                    let r = stack.pop().unwrap();
-                    let l = stack.pop().unwrap();
-                    for v in (op.calculate)(&vec![l, r]) {
+                let length = stack.len();
+                if op.arity <= length {
+                    let popped : Vec<_> = stack.drain((length - op.arity)..length).collect();
+                    for v in (op.calculate)(&popped[..]) {
                         stack.push(v);
                     }
                 } else {
