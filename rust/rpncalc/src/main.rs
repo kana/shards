@@ -6,10 +6,6 @@ struct Operator<'a> {
     calculate: &'a Fn(&[i64]) -> Vec<i64>,
 }
 
-fn add(ns: &[i64]) -> Vec<i64> {
-    vec![ns[0] + ns[1]]
-}
-
 fn main() {
     let stdin = std::io::stdin();
     let mut stack: Vec<i64> = Vec::new();
@@ -17,7 +13,7 @@ fn main() {
         Operator {
             token: "+",
             arity: 2,
-            calculate: &add,
+            calculate: &|ns| { vec![ns[0] + ns[1]] },
         }
     ];
 
