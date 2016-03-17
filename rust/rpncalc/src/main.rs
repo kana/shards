@@ -14,7 +14,22 @@ fn main() {
             token: "+",
             arity: 2,
             calculate: &|ns| { vec![ns[0] + ns[1]] },
-        }
+        },
+        Operator {
+            token: "-",
+            arity: 2,
+            calculate: &|ns| { vec![ns[0] - ns[1]] },
+        },
+        Operator {
+            token: "*",
+            arity: 2,
+            calculate: &|ns| { vec![ns[0] * ns[1]] },
+        },
+        Operator {
+            token: "/",
+            arity: 2,
+            calculate: &|ns| { vec![ns[0] / ns[1]] },
+        },
     ];
 
     for line in stdin.lock().lines() {
