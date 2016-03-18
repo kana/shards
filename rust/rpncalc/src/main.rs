@@ -30,6 +30,11 @@ fn main() {
             arity: 2,
             calculate: &|ns| { vec![ns[0] / ns[1]] },
         },
+        Operator {
+            token: "swap",
+            arity: 2,
+            calculate: &|ns| { vec![ns[1], ns[0]] },
+        },
     ];
 
     for line in stdin.lock().lines() {
