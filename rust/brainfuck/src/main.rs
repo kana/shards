@@ -8,6 +8,7 @@ fn main() {
     let mut loop_indices = Vec::new();
     let mut data = vec![0u32];
     let mut data_index = 0;
+    let mut input_bytes = std::io::stdin().bytes();
 
     for file_path in env::args().skip(1) {
         for b in File::open(file_path).unwrap().bytes() {
@@ -20,7 +21,6 @@ fn main() {
     }
 
     while ops_index < ops.len() {
-        println!("opi = {:?}; op = {:?}; di = {:?}; data = {:?}", ops_index, ops[ops_index], data_index, data);
         let c = ops[ops_index];
         match c {
             '<' => {
@@ -42,7 +42,9 @@ fn main() {
                 data[data_index] = data[data_index] - 1;
             },
             ',' => {
-                // TODO
+                let b = input_bytes.next().unwrap().unwrap();
+                let c = u32::from(b);
+                data[data_index] = c;
             },
             '.' => {
                 print!("{}", std::char::from_u32(data[data_index]).unwrap());
