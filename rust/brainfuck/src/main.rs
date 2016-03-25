@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::env;
 use std::fs::File;
 use std::io::prelude::*;
@@ -5,10 +6,10 @@ use std::io::prelude::*;
 fn main() {
     let mut ops = Vec::new();
     let mut ops_index : usize = 0;
-    let mut loop_indices = Vec::new();
     let mut data = vec![0u32];
     let mut data_index = 0;
     let mut input_bytes = std::io::stdin().bytes();
+    let mut loop_indices_map = HashMap::new();
 
     for file_path in env::args().skip(1) {
         for b in File::open(file_path).unwrap().bytes() {
@@ -17,6 +18,30 @@ fn main() {
                 '<' | '>' | '+' | '-' | ',' | '.' | '[' | ']' => ops.push(c),
                 _ => {},
             }
+        }
+    }
+
+    for i in 0..ops.len() {
+        if ops[i] == '[' {
+            let mut nest = 0;
+            let mut k = i;
+            for j in i..ops.len() {
+                match ops[j] {
+                    '[' => {
+                        nest = nest + 1;
+                    },
+                    ']' => {
+                        nest = nest - 1;
+                        if nest == 0 {
+                            k = j;
+                            break;
+                        }
+                    }
+                    _ => {},
+                }
+            }
+            loop_indices_map.insert(i, k);
+            loop_indices_map.insert(k, i);
         }
     }
 
@@ -51,30 +76,12 @@ fn main() {
             },
             '[' => {
                 if data[data_index] == 0 {
-                    let mut nest = 0;
-                    let i = ops_index;
-                    for i in ops_index..ops.len() {
-                        match ops[i] {
-                            '[' => {
-                                nest = nest + 1;
-                            },
-                            ']' => {
-                                nest = nest - 1;
-                                if nest == 0 {
-                                    break;
-                                }
-                            }
-                            _ => {},
-                        }
-                    }
-                    ops_index = i;
-                } else {
-                    loop_indices.push(ops_index);
+                    ops_index = *loop_indices_map.get(&ops_index).unwrap();
                 }
             },
             ']' => {
                 if data[data_index] != 0 {
-                    ops_index = loop_indices.pop().unwrap();
+                    ops_index = *loop_indices_map.get(&ops_index).unwrap();
                     continue;
                 }
             },
