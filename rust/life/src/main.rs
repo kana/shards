@@ -15,6 +15,11 @@ fn show_board(cells: &[u8]) {
 }
 
 fn main() {
-    let cells = [0; WIDTH * HEIGHT];
+    let mut cells = [0; WIDTH * HEIGHT];
+    cells[pos(WIDTH / 2, HEIGHT / 2 - 1)] = 1;
+    cells[pos(WIDTH / 2 + 1, HEIGHT / 2 - 1)] = 1;
+    cells[pos(WIDTH / 2 - 1, HEIGHT / 2)] = 1;
+    cells[pos(WIDTH / 2, HEIGHT / 2)] = 1;
+    cells[pos(WIDTH / 2, HEIGHT / 2 + 1)] = 1;
     show_board(&cells);
 }
