@@ -53,5 +53,6 @@ fn main() {
     loop {
         show_board(&cells);
         update(&mut cells);
+        std::thread::sleep(std::time::Duration::from_millis(500));
     }
 }
