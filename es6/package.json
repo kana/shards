@@ -4,6 +4,7 @@
   "description": "test",
   "main": "test.js",
   "scripts": {
+    "build": "babel src -d build",
     "test": "false"
   },
   "author": "",
