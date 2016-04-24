@@ -14,15 +14,7 @@ var renderer = Physics.renderer('canvas', {
   el: 'viewport',
   width: viewWidth,
   height: viewHeight,
-  meta: false,
-  styles: {
-    'circle': {
-      strokeStyle: 'hsla(60, 37%, 17%, 1)',
-      lineWidth: 1,
-      fillStyle: 'hsla(60, 37%, 57%, 0.8)',
-      angleIndicator: 'hsla(60, 37%, 17%, 0.4)'
-    }
-  }
+  meta: false
 });
 world.add(renderer);
 world.on('step', function () {
@@ -41,7 +33,13 @@ var ball1 = Physics.body('circle', {
   y: 30,
   vx: 0.2,
   vy: 0.01,
-  radius: 20
+  radius: 20,
+  styles: {
+    strokeStyle: '#933',
+    lineWidth: 1,
+    fillStyle: '#fcc',
+    angleIndicator: '#c66'
+  }
 });
 world.add(ball1);
 
@@ -50,7 +48,13 @@ var ball2 = Physics.body('circle', {
   y: viewHeight * 0.7,
   vx: -0.3,
   vy: 0.4,
-  radius: 25
+  radius: 25,
+  styles: {
+    strokeStyle: '#339',
+    lineWidth: 1,
+    fillStyle: '#ccf',
+    angleIndicator: '#66c'
+  }
 });
 world.add(ball2);
 
