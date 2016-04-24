@@ -36,14 +36,23 @@ world.add(Physics.behavior('edge-collision-detection', {
   cof: 0.99
 }));
 
-var ball = Physics.body('circle', {
+var ball1 = Physics.body('circle', {
   x: 50,
   y: 30,
   vx: 0.2,
   vy: 0.01,
   radius: 20
 });
-world.add(ball);
+world.add(ball1);
+
+var ball2 = Physics.body('circle', {
+  x: viewWidth * 0.8,
+  y: viewHeight * 0.7,
+  vx: -0.3,
+  vy: 0.4,
+  radius: 25
+});
+world.add(ball2);
 
 world.add(Physics.behavior('body-impulse-response'));
 world.add(Physics.behavior('constant-acceleration'));
