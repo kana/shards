@@ -58,6 +58,21 @@ var ball2 = Physics.body('circle', {
 });
 world.add(ball2);
 
+var ball3 = Physics.body('circle', {
+  x: viewWidth * 0.3,
+  y: viewHeight * 0.9,
+  vx: 0.8,
+  vy: -0.1,
+  radius: 25,
+  styles: {
+    strokeStyle: '#393',
+    lineWidth: 1,
+    fillStyle: '#cfc',
+    angleIndicator: '#6c6'
+  }
+});
+world.add(ball3);
+
 world.add(Physics.behavior('body-impulse-response'));
 world.add(Physics.behavior('constant-acceleration'));
 
