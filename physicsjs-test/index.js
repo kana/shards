@@ -74,6 +74,8 @@ var ball3 = Physics.body('circle', {
 world.add(ball3);
 
 world.add(Physics.behavior('body-impulse-response'));
+world.add(Physics.behavior('body-collision-detection'));
+world.add(Physics.behavior('sweep-prune'));
 world.add(Physics.behavior('constant-acceleration'));
 
 Physics.util.ticker.on(function (time) {
