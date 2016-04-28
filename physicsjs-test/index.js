@@ -28,36 +28,52 @@ world.on('step', function () {
   world.render();
 });
 
-var vieiwportBounds = Physics.aabb(0, 0, viewWidth, viewHeight);
-world.add(Physics.behavior('edge-collision-detection', {
-  aabb: vieiwportBounds,
-  restitution: 0.99,
-  cof: 0.99
-}));
-
+var circles = [];
 for (var i = 0; i < 20; i++) {
   var strokeColor = chooseRandomly(darkColors);
-  world.add(
-    Physics.body('circle', {
-      x: Math.random() * viewWidth,
-      y: Math.random() * viewHeight,
-      vx: Math.random() * 10 - 5,
-      vy: Math.random() * 10 - 5,
-      radius: Math.floor(Math.random() * 8 + 1) * viewWidth / 160,
-      styles: {
-        strokeStyle: strokeColor,
-        lineWidth: 1,
-        fillStyle: chooseRandomly(lightColors),
-        angleIndicator: strokeColor
-      }
-    })
-  );
+  var c = Physics.body('circle', {
+    x: Math.random() * viewWidth,
+    y: Math.random() * viewHeight,
+    vx: Math.random() * 10 - 5,
+    vy: Math.random() * 10 - 5,
+    radius: Math.floor(Math.random() * 8 + 1) * viewWidth / 160,
+    styles: {
+      strokeStyle: strokeColor,
+      lineWidth: 1,
+      fillStyle: chooseRandomly(lightColors),
+      angleIndicator: strokeColor
+    }
+  });
+  world.add(c);
+  circles.push(c);
 }
 
 world.add(Physics.behavior('body-impulse-response'));
 world.add(Physics.behavior('body-collision-detection'));
 world.add(Physics.behavior('sweep-prune'));
 world.add(Physics.behavior('constant-acceleration'));
+
+function wrapY() {
+  for (var i = 0, l = circles.length; i < l; i++) {
+    var c = circles[i];
+    if (c.state.pos.y > viewHeight) {
+      c.state.pos.y -= viewHeight;
+    }
+  }
+}
+world.on('step', wrapY);
+setTimeout(
+  function () {
+    world.off('step', wrapY);
+    var vieiwportBounds = Physics.aabb(0, 0, viewWidth, viewHeight);
+    world.add(Physics.behavior('edge-collision-detection', {
+      aabb: vieiwportBounds,
+      restitution: 0.99,
+      cof: 0.99
+    }));
+  },
+  10 * 1000
+);
 
 Physics.util.ticker.on(function (time) {
   world.step(time);
