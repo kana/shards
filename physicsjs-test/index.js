@@ -7,6 +7,13 @@ var world = Physics({
   integrator: 'verlet'
 });
 
+var lightColors = ['#ccf', '#cfc', '#cff', '#fcc', '#fcf', '#ffc'];
+var darkColors = ['#669', '#696', '#699', '#966', '#969', '#996'];
+
+function chooseRandomly(xs) {
+  return xs[Math.floor(Math.random() * xs.length)];
+}
+
 var viewWidth = 500;
 var viewHeight = 300;
 
@@ -28,50 +35,24 @@ world.add(Physics.behavior('edge-collision-detection', {
   cof: 0.99
 }));
 
-var ball1 = Physics.body('circle', {
-  x: 50,
-  y: 30,
-  vx: 0.2,
-  vy: 0.01,
-  radius: 20,
-  styles: {
-    strokeStyle: '#933',
-    lineWidth: 1,
-    fillStyle: '#fcc',
-    angleIndicator: '#c66'
-  }
-});
-world.add(ball1);
-
-var ball2 = Physics.body('circle', {
-  x: viewWidth * 0.8,
-  y: viewHeight * 0.7,
-  vx: -0.3,
-  vy: 0.4,
-  radius: 25,
-  styles: {
-    strokeStyle: '#339',
-    lineWidth: 1,
-    fillStyle: '#ccf',
-    angleIndicator: '#66c'
-  }
-});
-world.add(ball2);
-
-var ball3 = Physics.body('circle', {
-  x: viewWidth * 0.3,
-  y: viewHeight * 0.9,
-  vx: 0.8,
-  vy: -0.1,
-  radius: 25,
-  styles: {
-    strokeStyle: '#393',
-    lineWidth: 1,
-    fillStyle: '#cfc',
-    angleIndicator: '#6c6'
-  }
-});
-world.add(ball3);
+for (var i = 0; i < 20; i++) {
+  var strokeColor = chooseRandomly(darkColors);
+  world.add(
+    Physics.body('circle', {
+      x: Math.random() * viewWidth,
+      y: Math.random() * viewHeight,
+      vx: Math.random() * 10 - 5,
+      vy: Math.random() * 10 - 5,
+      radius: Math.floor(Math.random() * 8 + 1) * viewWidth / 160,
+      styles: {
+        strokeStyle: strokeColor,
+        lineWidth: 1,
+        fillStyle: chooseRandomly(lightColors),
+        angleIndicator: strokeColor
+      }
+    })
+  );
+}
 
 world.add(Physics.behavior('body-impulse-response'));
 world.add(Physics.behavior('body-collision-detection'));
