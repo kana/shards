@@ -31,12 +31,14 @@ world.on('step', function () {
 var circles = [];
 for (var i = 0; i < 20; i++) {
   var strokeColor = chooseRandomly(darkColors);
+  var isStatic = Math.floor(Math.random() * 2) == 0;
   var c = Physics.body('circle', {
     x: Math.random() * viewWidth,
     y: Math.random() * viewHeight,
-    vx: Math.random() * 10 - 5,
-    vy: Math.random() * 10 - 5,
+    vx: isStatic ? 0 : Math.random() * 10 - 5,
+    vy: isStatic ? 0 : Math.random() * 10 - 5,
     radius: Math.floor(Math.random() * 8 + 1) * viewWidth / 160,
+    treatment: isStatic ? 'static' : 'dynamic',
     styles: {
       strokeStyle: strokeColor,
       lineWidth: 1,
@@ -58,6 +60,7 @@ function wrapY() {
     var c = circles[i];
     if (c.state.pos.y > viewHeight) {
       c.state.pos.y -= viewHeight;
+      c.state.vel.zero();
     }
   }
 }
@@ -71,6 +74,10 @@ setTimeout(
       restitution: 0.99,
       cof: 0.99
     }));
+    for (var i = 0, l = circles.length; i < l; i++) {
+      var c = circles[i];
+      c.treatment = 'dynamic';
+    }
   },
   10 * 1000
 );
