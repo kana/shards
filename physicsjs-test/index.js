@@ -60,7 +60,7 @@ function wrapY() {
     var c = circles[i];
     if (c.state.pos.y > viewHeight) {
       c.state.pos.y -= viewHeight;
-      c.state.vel.zero();
+      c.state.vel.y = 0;
     }
   }
 }
