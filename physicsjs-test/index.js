@@ -50,6 +50,37 @@ for (var i = 0; i < 20; i++) {
   circles.push(c);
 }
 
+var borderStyles = {
+  strokeStyle: '#666',
+  lineWidth: 1,
+  fillStyle: '#666',
+  angleIndicator: '#666'
+};
+world.add(Physics.body('rectangle', {
+  x: 0,
+  y: viewHeight / 2,
+  width: 0,
+  height: viewHeight,
+  treatment: 'static',
+  styles: borderStyles
+}));
+world.add(Physics.body('rectangle', {
+  x: viewWidth,
+  y: viewHeight / 2,
+  width: 0,
+  height: viewHeight,
+  treatment: 'static',
+  styles: borderStyles
+}));
+world.add(Physics.body('rectangle', {
+  x: viewWidth  / 2,
+  y: 0,
+  width: viewWidth,
+  height: 0,
+  treatment: 'static',
+  styles: borderStyles
+}));
+
 world.add(Physics.behavior('body-impulse-response'));
 world.add(Physics.behavior('body-collision-detection'));
 world.add(Physics.behavior('sweep-prune'));
@@ -68,11 +99,13 @@ world.on('step', wrapY);
 setTimeout(
   function () {
     world.off('step', wrapY);
-    var vieiwportBounds = Physics.aabb(0, 0, viewWidth, viewHeight);
-    world.add(Physics.behavior('edge-collision-detection', {
-      aabb: vieiwportBounds,
-      restitution: 0.99,
-      cof: 0.99
+    world.add(Physics.body('rectangle', {
+      x: viewWidth  / 2,
+      y: viewHeight,
+      width: viewWidth,
+      height: 0,
+      treatment: 'static',
+      styles: borderStyles
     }));
     for (var i = 0, l = circles.length; i < l; i++) {
       var c = circles[i];
