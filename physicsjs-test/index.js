@@ -74,7 +74,7 @@ world.add(Physics.body('rectangle', {
 }));
 world.add(Physics.body('rectangle', {
   x: viewWidth  / 2,
-  y: 0,
+  y: -(viewWidth * 8 / 160),
   width: viewWidth,
   height: 0,
   treatment: 'static',
@@ -89,8 +89,8 @@ world.add(Physics.behavior('constant-acceleration'));
 function wrapY() {
   for (var i = 0, l = circles.length; i < l; i++) {
     var c = circles[i];
-    if (c.state.pos.y > viewHeight) {
-      c.state.pos.y -= viewHeight;
+    if (c.state.pos.y > viewHeight + c.radius) {
+      c.state.pos.y -= viewHeight + c.radius * 2;
       c.state.vel.y = 0;
     }
   }
