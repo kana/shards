@@ -115,6 +115,28 @@ setTimeout(
   10 * 1000
 );
 
+var attractor = Physics.behavior('attractor', {
+  order: 0,
+  strength: 0.002
+});
+world.on({
+  'interact:poke': function (position) {
+    world.wakeUpAll();
+    attractor.position(position);
+    world.add(attractor);
+  },
+  'interact:move': function (position) {
+    attractor.position(position);
+  },
+  'interact:release': function () {
+    world.wakeUpAll();
+    world.remove(attractor);
+  },
+});
+world.add(
+  Physics.behavior('interactive', {el: renderer.container})
+);
+
 Physics.util.ticker.on(function (time) {
   world.step(time);
 });
