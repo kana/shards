@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "browserify -g uglifyify -t [ babelify --presets [ react ] ] app.js -o app.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
