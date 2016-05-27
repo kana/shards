@@ -1,5 +1,3 @@
-var othello = {};
-
 (function () {
   'use strict';
 
@@ -939,21 +937,21 @@ var othello = {};
 
   // Public API {{{1
 
-  othello.force = force;
-  othello.delay = delay;
-  othello.EMPTY = EMPTY;
-  othello.WHITE = WHITE;
-  othello.BLACK = BLACK;
-  othello.nextPlayer = nextPlayer;
-  othello.registerAI = registerAI;
-  othello.N = N;
-  othello.ix = ix;
-  othello.makeInitialGameBoard = makeInitialGameBoard;
-  othello.judge = judge;
-  othello.addNewAI = addNewAI;
-  othello.makeAI = makeAI;
-  othello.makeInitialGameTree = makeInitialGameTree;
-  othello.nameMove = nameMove;
+  exports.force = force;
+  exports.delay = delay;
+  exports.EMPTY = EMPTY;
+  exports.WHITE = WHITE;
+  exports.BLACK = BLACK;
+  exports.nextPlayer = nextPlayer;
+  exports.registerAI = registerAI;
+  exports.N = N;
+  exports.ix = ix;
+  exports.makeInitialGameBoard = makeInitialGameBoard;
+  exports.judge = judge;
+  exports.addNewAI = addNewAI;
+  exports.makeAI = makeAI;
+  exports.makeInitialGameTree = makeInitialGameTree;
+  exports.nameMove = nameMove;
 
 
 
