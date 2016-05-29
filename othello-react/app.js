@@ -1,17 +1,19 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var Othello = require('./othello');
 
 var App = React.createClass({
   getInitialState: function () {
     return {
-      n: 123
+      gameTree: Othello.makeInitialGameTree()
     };
   },
 
   render: function () {
     return (
       <div className="app">
-        {this.state.n}
+        {this.state.gameTree.player}
+        {this.state.gameTree.moves.length}
         <button onClick={this.resetGame}>Start a new game</button>
       </div>
     );
@@ -19,7 +21,7 @@ var App = React.createClass({
 
   resetGame: function () {
     this.setState({
-      n: Math.random()
+      gameTree: Othello.makeInitialGameTree()
     });
   }
 });
