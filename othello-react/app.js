@@ -41,8 +41,9 @@ var App = React.createClass({
           if (attackable[O.ix(x, y)]) {
             classNames.push('attackable');
           }
+          var id = 'cell-' + x + '-' + y;
           ss.push(
-            <span key={key} id={'cell-' + x + '-' + y} className={classNames}>
+            <span key={key} id={id} className={classNames.join(' ')}>
             </span>
           );
         } else if (0 <= x && y === -1) {
