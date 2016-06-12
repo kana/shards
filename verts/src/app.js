@@ -1,2 +1,4 @@
 cats = require('./cats.js');
-console.log(cats);
+cats.forEach(c => {
+  console.log(c);
+});
