@@ -1,4 +1,9 @@
-var cats = require('./cats.js');
-cats.forEach(c => {
-  console.log(c);
+import 'babel-polyfill';
+import cats from './cats';
+import $ from 'jquery';
+
+$(() => {
+  cats.forEach(c => {
+    $('body').append($('<div>').text(c));
+  });
 });
