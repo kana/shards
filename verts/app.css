@@ -1,0 +1,42 @@
+.timeline {
+  width: 800px;
+  margin: auto;
+  border: 1px solid #ccc;
+  font-size: 0;
+}
+
+.line {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 200px;
+  min-height: 1em;
+  font-size: initial;
+  background: #fff;
+}
+
+.line:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.more {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: initial;
+  margin: auto;
+  animation-duration: 2s;
+  animation-name: blink;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1.0;
+  }
+
+  to {
+    opacity: 0.25;
+  }
+}
