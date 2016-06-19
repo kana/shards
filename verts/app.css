@@ -12,6 +12,7 @@
   min-height: 1em;
   font-size: initial;
   background: #fff;
+  vertical-align: top;
 }
 
 .line:nth-child(even) {
