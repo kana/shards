@@ -19,8 +19,8 @@ function push($line, $box)
 }
 
 $(() => {
-  push($('.line:nth-child(1)'), makeBox());
-  push($('.line:nth-child(2)'), makeBox());
-  push($('.line:nth-child(3)'), makeBox());
-  push($('.line:nth-child(4)'), makeBox());
+  $('.line').each((_, line) => {
+    push($(line), makeBox());
+    push($(line), makeBox());
+  });
 });
