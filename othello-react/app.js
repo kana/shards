@@ -24,16 +24,17 @@ var App = React.createClass({
 
   renderBoard: function (board, player, moves) {
     var O = Othello;
-    var ss = [];
     var attackable = [];
     moves.forEach(function (m) {
       if (!m.isPassingMove)
         attackable[O.ix(m.x, m.y)] = true;
     });
 
+    var rows = [];
     for (var y = -1; y < O.N; y++) {
+      var cells = [];
       for (var x = -1; x < O.N; x++) {
-        var key = x + 'x' + y;
+        var key = 'cell_' + x + '_' + y;
         if (0 <= y && 0 <= x) {
           var classNames = [];
           classNames.push('cell');
@@ -41,24 +42,33 @@ var App = React.createClass({
           if (attackable[O.ix(x, y)]) {
             classNames.push('attackable');
           }
-          var id = 'cell-' + x + '-' + y;
-          ss.push(
-            <span key={key} id={id} className={classNames.join(' ')}>
-            </span>
+          cells.push(
+            <td key={key} id={key} className={classNames.join(' ')}>
+              <span className="disc"></span>
+            </td>
           );
         } else if (0 <= x && y === -1) {
-          ss.push(<span key={key}>{String.fromCharCode('a'.charCodeAt(0) + x)}</span>);
+          cells.push(
+            <th key={key}>
+              {String.fromCharCode('a'.charCodeAt(0) + x)}
+            </th>
+          );
         } else if (x === -1 && 0 <= y) {
-          ss.push(<span key={key}>{y + 1}</span>);
+          cells.push(<th key={key}>{y + 1}</th>);
         } else /* if (x === -1 && y === -1) */ {
-          ss.push(<span key={key}></span>);
+          cells.push(<th key={key}></th>);
         }
       }
+      rows.push(<tr key={rows.length}>{cells}</tr>);
     }
 
     return (
-      <div className="board">
-        {ss}
+      <div id="game-board">
+        <table>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
       </div>
     );
   },
