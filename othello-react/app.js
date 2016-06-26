@@ -22,12 +22,18 @@ var App = React.createClass({
     );
   },
 
+  shiftToNewGameTree: function (gameTree) {
+    this.setState({
+      gameTree: gameTree
+    });
+  },
+
   renderBoard: function (board, player, moves) {
     var O = Othello;
     var attackable = [];
     moves.forEach(function (m) {
       if (!m.isPassingMove)
-        attackable[O.ix(m.x, m.y)] = true;
+        attackable[O.ix(m.x, m.y)] = m;
     });
 
     var rows = [];
@@ -37,13 +43,19 @@ var App = React.createClass({
         var key = 'cell_' + x + '_' + y;
         if (0 <= y && 0 <= x) {
           var classNames = [];
+          let move = attackable[O.ix(x, y)];
+          var attack = null;
           classNames.push('cell');
-          classNames.push(attackable[O.ix(x, y)] ? player : board[O.ix(x, y)]);
-          if (attackable[O.ix(x, y)]) {
+          classNames.push(move ? player : board[O.ix(x, y)]);
+          if (move) {
             classNames.push('attackable');
+            attack = () => {
+              this.shiftToNewGameTree(O.force(move.gameTreePromise));
+            };
           }
           cells.push(
-            <td key={key} id={key} className={classNames.join(' ')}>
+            <td key={key} id={key} className={classNames.join(' ')}
+                onClick={attack}>
               <span className="disc"></span>
             </td>
           );
