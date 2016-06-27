@@ -29,22 +29,22 @@ var App = React.createClass({
   },
 
   renderBoard: function (board, player, moves) {
-    var O = Othello;
-    var attackable = [];
-    moves.forEach(function (m) {
+    let O = Othello;
+    let attackable = [];
+    moves.forEach(m => {
       if (!m.isPassingMove)
         attackable[O.ix(m.x, m.y)] = m;
     });
 
-    var rows = [];
-    for (var y = -1; y < O.N; y++) {
-      var cells = [];
-      for (var x = -1; x < O.N; x++) {
-        var key = 'cell_' + x + '_' + y;
+    let rows = [];
+    for (let y = -1; y < O.N; y++) {
+      let cells = [];
+      for (let x = -1; x < O.N; x++) {
+        let key = 'cell_' + x + '_' + y;
         if (0 <= y && 0 <= x) {
-          var classNames = [];
+          let classNames = [];
           let move = attackable[O.ix(x, y)];
-          var attack = null;
+          let attack = null;
           classNames.push('cell');
           classNames.push(move ? player : board[O.ix(x, y)]);
           if (move) {
