@@ -2,14 +2,16 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Othello = require('./othello');
 
-var App = React.createClass({
-  getInitialState: function () {
-    return {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       gameTree: Othello.makeInitialGameTree()
     };
-  },
+  }
 
-  render: function () {
+  render() {
     return (
       <div className="app">
         {this.renderBoard(
@@ -20,15 +22,15 @@ var App = React.createClass({
         <button onClick={this.resetGame}>Start a new game</button>
       </div>
     );
-  },
+  }
 
-  shiftToNewGameTree: function (gameTree) {
+  shiftToNewGameTree(gameTree) {
     this.setState({
       gameTree: gameTree
     });
-  },
+  }
 
-  renderBoard: function (board, player, moves) {
+  renderBoard(board, player, moves) {
     let O = Othello;
     let attackable = [];
     moves.forEach(m => {
@@ -83,14 +85,14 @@ var App = React.createClass({
         </table>
       </div>
     );
-  },
+  }
 
-  resetGame: function () {
+  resetGame() {
     this.setState({
       gameTree: Othello.makeInitialGameTree()
     });
   }
-});
+}
 
 ReactDOM.render(
   <App />,
