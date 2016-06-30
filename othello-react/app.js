@@ -1,6 +1,6 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Othello = require('./othello');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const Othello = require('./othello');
 
 class App extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class App extends React.Component {
   }
 
   renderBoard(board, player, moves) {
-    let O = Othello;
+    const O = Othello;
     let attackable = [];
     moves.forEach(m => {
       if (!m.isPassingMove)
