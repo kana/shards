@@ -33,9 +33,13 @@ class App extends React.Component {
   renderBoard(board, player, moves) {
     const O = Othello;
     let attackable = [];
+    let passingMove = null;
     moves.forEach(m => {
-      if (!m.isPassingMove)
+      if (m.isPassingMove) {
+        passingMove = m;
+      } else {
         attackable[O.ix(m.x, m.y)] = m;
+      }
     });
 
     let rows = [];
@@ -76,6 +80,17 @@ class App extends React.Component {
       rows.push(<tr key={rows.length}>{cells}</tr>);
     }
 
+    let pass = null;
+    if (passingMove) {
+      pass = (
+        <button onClick={() => {
+          this.shiftToNewGameTree(O.force(passingMove.gameTreePromise));
+        }}>
+          Pass
+        </button>
+      );
+    }
+
     return (
       <div id="game-board">
         <table>
@@ -83,6 +98,7 @@ class App extends React.Component {
             {rows}
           </tbody>
         </table>
+        {pass}
       </div>
     );
   }
