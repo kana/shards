@@ -98,6 +98,7 @@ class App extends React.Component {
             {rows}
           </tbody>
         </table>
+        <div>Current player: {player}</div>
         {pass}
       </div>
     );
