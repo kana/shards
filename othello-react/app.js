@@ -99,7 +99,7 @@ class App extends React.Component {
           </tbody>
         </table>
         <div>Current player: {player}</div>
-        {pass}
+        <div>{pass || <span>Choose your move.</span>}</div>
       </div>
     );
   }
