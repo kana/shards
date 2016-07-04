@@ -7,8 +7,22 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      gameTree: Othello.makeInitialGameTree()
+      gameTree: Othello.makeInitialGameTree(),
+      blackPlayerType: 'human',
+      whitePlayerType: 'random'
     };
+  }
+
+  setBlackPlayerType(playerType) {
+    this.setState({
+      blackPlayerType: playerType
+    });
+  }
+
+  setWhitePlayerType(playerType) {
+    this.setState({
+      whitePlayerType: playerType
+    });
   }
 
   render() {
@@ -19,7 +33,25 @@ class App extends React.Component {
             this.state.gameTree.player,
             this.state.gameTree.moves
         )}
-        <button onClick={this.resetGame}>Start a new game</button>
+        <div className="preferences">
+          <div className="player-types">
+            <label>
+              Black:
+              <PlayerTypeSelector
+                playerType={this.state.blackPlayerType}
+                onClick={this.setBlackPlayerType}
+              />
+            </label>
+            <label>
+              White:
+              <PlayerTypeSelector
+                playerType={this.state.whitePlayerType}
+                onClick={this.setWhitePlayerType}
+              />
+            </label>
+          </div>
+          <button onClick={this.resetGame}>Start a new game</button>
+        </div>
       </div>
     );
   }
@@ -108,6 +140,26 @@ class App extends React.Component {
     this.setState({
       gameTree: Othello.makeInitialGameTree()
     });
+  }
+}
+
+class PlayerTypeSelector extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const availablePlayerTypeDetails = [
+      {playerType: 'human', label: 'Human'},
+      {playerType: 'random', label: 'AI (Random)'}
+    ];
+    return (
+      <select defaultValue={this.props.playerType}>
+        {availablePlayerTypeDetails.map(d =>
+          <option value={d.playerType}>{d.label}</option>
+        )}
+      </select>
+    );
   }
 }
 
