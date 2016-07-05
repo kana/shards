@@ -64,6 +64,10 @@ class App extends React.Component {
 
   renderBoard(board, player, moves) {
     const O = Othello;
+    const currentPlayerType = player === O.BLACK ?
+        this.state.blackPlayerType :
+        this.state.whitePlayerType;
+    const isHuman = currentPlayerType === 'human';
     let attackable = [];
     let passingMove = null;
     moves.forEach(m => {
@@ -87,9 +91,11 @@ class App extends React.Component {
           classNames.push(move ? player : board[O.ix(x, y)]);
           if (move) {
             classNames.push('attackable');
-            attack = () => {
-              this.shiftToNewGameTree(O.force(move.gameTreePromise));
-            };
+            if (isHuman) {
+              attack = () => {
+                this.shiftToNewGameTree(O.force(move.gameTreePromise));
+              };
+            }
           }
           cells.push(
             <td key={key} id={key} className={classNames.join(' ')}
@@ -113,7 +119,7 @@ class App extends React.Component {
     }
 
     let pass = null;
-    if (passingMove) {
+    if (passingMove && isHuman) {
       pass = (
         <button onClick={() => {
           this.shiftToNewGameTree(O.force(passingMove.gameTreePromise));
@@ -121,6 +127,16 @@ class App extends React.Component {
           Pass
         </button>
       );
+    }
+
+    if (!isHuman) {
+      setTimeout(
+        () => {
+          const m = moves[Math.floor(Math.random() * moves.length)];
+          this.shiftToNewGameTree(O.force(m.gameTreePromise));
+        },
+        500
+      )
     }
 
     return (
@@ -131,7 +147,7 @@ class App extends React.Component {
           </tbody>
         </table>
         <div>Current player: {player}</div>
-        <div>{pass || <span>Choose your move.</span>}</div>
+        <div>{isHuman ? (pass || 'Choose your move.') : 'Now thinking...'}</div>
       </div>
     );
   }
