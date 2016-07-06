@@ -39,14 +39,14 @@ class App extends React.Component {
               Black:
               <PlayerTypeSelector
                 playerType={this.state.blackPlayerType}
-                onClick={this.setBlackPlayerType}
+                onChange={this.setBlackPlayerType}
               />
             </label>
             <label>
               White:
               <PlayerTypeSelector
                 playerType={this.state.whitePlayerType}
-                onClick={this.setWhitePlayerType}
+                onChange={this.setWhitePlayerType}
               />
             </label>
           </div>
@@ -170,7 +170,7 @@ class PlayerTypeSelector extends React.Component {
       {playerType: 'random', label: 'AI (Random)'}
     ];
     return (
-      <select defaultValue={this.props.playerType}>
+      <select defaultValue={this.props.playerType} onChange={this.props.onChange}>
         {availablePlayerTypeDetails.map(d =>
           <option value={d.playerType}>{d.label}</option>
         )}
