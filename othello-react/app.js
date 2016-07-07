@@ -11,6 +11,10 @@ class App extends React.Component {
       blackPlayerType: 'human',
       whitePlayerType: 'random'
     };
+
+    this.setBlackPlayerType = this.setBlackPlayerType.bind(this);
+    this.setWhitePlayerType = this.setWhitePlayerType.bind(this);
+    this.resetGame = this.resetGame.bind(this);
   }
 
   setBlackPlayerType(playerType) {
