@@ -9,7 +9,8 @@ class App extends React.Component {
     this.state = {
       gameTree: Othello.makeInitialGameTree(),
       blackPlayerType: 'human',
-      whitePlayerType: 'random'
+      whitePlayerType: 'random',
+      started: false
     };
 
     this.setBlackPlayerType = this.setBlackPlayerType.bind(this);
@@ -35,7 +36,8 @@ class App extends React.Component {
         {this.renderBoard(
             this.state.gameTree.board,
             this.state.gameTree.player,
-            this.state.gameTree.moves
+            this.state.gameTree.moves,
+            this.state.started
         )}
         <div className="preferences">
           <div className="player-types">
@@ -66,7 +68,7 @@ class App extends React.Component {
     });
   }
 
-  renderBoard(board, player, moves) {
+  renderBoard(board, player, moves, started) {
     const O = Othello;
     const currentPlayerType = player === O.BLACK ?
         this.state.blackPlayerType :
@@ -74,13 +76,15 @@ class App extends React.Component {
     const isHuman = currentPlayerType === 'human';
     let attackable = [];
     let passingMove = null;
-    moves.forEach(m => {
-      if (m.isPassingMove) {
-        passingMove = m;
-      } else {
-        attackable[O.ix(m.x, m.y)] = m;
-      }
-    });
+    if (started) {
+      moves.forEach(m => {
+        if (m.isPassingMove) {
+          passingMove = m;
+        } else {
+          attackable[O.ix(m.x, m.y)] = m;
+        }
+      });
+    }
 
     let rows = [];
     for (let y = -1; y < O.N; y++) {
@@ -133,7 +137,7 @@ class App extends React.Component {
       );
     }
 
-    if (!isHuman) {
+    if (started && !isHuman) {
       setTimeout(
         () => {
           const m = moves[Math.floor(Math.random() * moves.length)];
@@ -158,7 +162,8 @@ class App extends React.Component {
 
   resetGame() {
     this.setState({
-      gameTree: Othello.makeInitialGameTree()
+      gameTree: Othello.makeInitialGameTree(),
+      started: true
     });
   }
 }
