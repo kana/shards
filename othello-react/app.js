@@ -154,8 +154,14 @@ class App extends React.Component {
             {rows}
           </tbody>
         </table>
-        <div>Current player: {player}</div>
-        <div>{isHuman ? (pass || 'Choose your move.') : 'Now thinking...'}</div>
+        {started &&
+          <div className="console">
+            <div className="turn">Current player: {player}</div>
+            <div className="move">{
+              isHuman ? (pass || 'Choose your move.') : 'Now thinking...'
+            }</div>
+          </div>
+        }
       </div>
     );
   }
