@@ -137,7 +137,7 @@ class App extends React.Component {
       );
     }
 
-    if (started && !isHuman) {
+    if (started && !isHuman && moves.length > 0) {
       setTimeout(
         () => {
           const m = moves[Math.floor(Math.random() * moves.length)];
