@@ -147,6 +147,8 @@ class App extends React.Component {
       )
     }
 
+    const finished = moves.length === 0;
+    const result = finished ? O.judge(board) : undefined;
     return (
       <div id="game-board">
         <table>
@@ -154,12 +156,21 @@ class App extends React.Component {
             {rows}
           </tbody>
         </table>
-        {started &&
+        {started && !finished &&
           <div className="console">
             <div className="turn">Current player: {player}</div>
             <div className="move">{
               isHuman ? (pass || 'Choose your move.') : 'Now thinking...'
             }</div>
+          </div>
+        }
+        {started && finished &&
+          <div className="result">
+            {
+              result === 0 ?
+              'The game ends in a draw.' :
+              'The winner is ' + (result === 1 ? O.BLACK : O.WHITE) + '.'
+            }
           </div>
         }
       </div>
