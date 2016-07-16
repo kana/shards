@@ -198,7 +198,7 @@ class PlayerTypeSelector extends React.Component {
     return (
       <select defaultValue={this.props.playerType} onChange={this.props.onChange}>
         {availablePlayerTypeDetails.map(d =>
-          <option value={d.playerType}>{d.label}</option>
+          <option key={d.playerType} value={d.playerType}>{d.label}</option>
         )}
       </select>
     );
