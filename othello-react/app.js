@@ -34,9 +34,7 @@ class App extends React.Component {
     return (
       <div className="app">
         {this.renderBoard(
-            this.state.gameTree.board,
-            this.state.gameTree.player,
-            this.state.gameTree.moves,
+            this.state.gameTree,
             this.state.started
         )}
         <div className="preferences">
@@ -68,8 +66,9 @@ class App extends React.Component {
     });
   }
 
-  renderBoard(board, player, moves, started) {
+  renderBoard(gameTree, started) {
     const O = Othello;
+    const {board, player, moves} = gameTree;
     const currentPlayerType = player === O.BLACK ?
         this.state.blackPlayerType :
         this.state.whitePlayerType;
