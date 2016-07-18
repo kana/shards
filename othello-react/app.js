@@ -137,13 +137,7 @@ class App extends React.Component {
     }
 
     if (started && !isHuman && moves.length > 0) {
-      setTimeout(
-        () => {
-          const m = moves[Math.floor(Math.random() * moves.length)];
-          this.shiftToNewGameTree(O.force(m.gameTreePromise));
-        },
-        500
-      )
+      this.chooseMoveByAI(gameTree);
     }
 
     const finished = moves.length === 0;
@@ -174,6 +168,16 @@ class App extends React.Component {
         }
       </div>
     );
+  }
+
+  chooseMoveByAI(gameTree) {
+    setTimeout(
+      () => {
+        const m = gameTree.moves[Math.floor(Math.random() * gameTree.moves.length)];
+        this.shiftToNewGameTree(Othello.force(m.gameTreePromise));
+      },
+      500
+    )
   }
 
   resetGame() {
