@@ -137,7 +137,7 @@ class App extends React.Component {
     }
 
     if (started && !isHuman && moves.length > 0) {
-      this.chooseMoveByAI(gameTree);
+      this.chooseMoveByAI(gameTree, this.state.aiTable[player]);
     }
 
     const finished = moves.length === 0;
@@ -170,10 +170,10 @@ class App extends React.Component {
     );
   }
 
-  chooseMoveByAI(gameTree) {
+  chooseMoveByAI(gameTree, ai) {
     setTimeout(
       () => {
-        const m = gameTree.moves[Math.floor(Math.random() * gameTree.moves.length)];
+        const m = ai.findTheBestMove(gameTree);
         this.shiftToNewGameTree(Othello.force(m.gameTreePromise));
       },
       500
@@ -183,6 +183,12 @@ class App extends React.Component {
   resetGame() {
     this.setState({
       gameTree: Othello.makeInitialGameTree(),
+      aiTable: {
+        black: this.state.blackPlayerType !== 'human' &&
+               Othello.makeAI(this.state.blackPlayerType),
+        white: this.state.whitePlayerType !== 'human' &&
+               Othello.makeAI(this.state.whitePlayerType)
+      },
       started: true
     });
   }
