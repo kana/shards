@@ -9,7 +9,7 @@ class App extends React.Component {
     this.state = {
       gameTree: Othello.makeInitialGameTree(),
       blackPlayerType: 'human',
-      whitePlayerType: 'random',
+      whitePlayerType: 'better-131072',
       started: false
     };
 
@@ -202,7 +202,20 @@ class PlayerTypeSelector extends React.Component {
   render() {
     const availablePlayerTypeDetails = [
       {playerType: 'human', label: 'Human'},
-      {playerType: 'random', label: 'AI (Random)'}
+      {playerType: 'simpleCount-131072', label: 'AI (Type A; try to get many disks)'},
+      {playerType: 'basic-131072', label: 'AI (Type B; try to own corner positions)'},
+      {playerType: 'better-131072', label: 'AI (Type C; try to own corner positions carefully)'},
+      {playerType: 'moveCount-131072', label: 'AI (Type D; Prioritize number of moves)'},
+      {playerType: 'moveCountAndPositions-131072', label: 'AI (Type E; Prioritize number of moves and positions)'},
+      {playerType: 'mcts-128', label: 'AI (Type M-128; Monte Carlo Tree Search with 128 iterations)'},
+      {playerType: 'mcts-256', label: 'AI (Type M-256; Monte Carlo Tree Search with 256 iterations)'},
+      {playerType: 'mcts-512', label: 'AI (Type M-512; Monte Carlo Tree Search with 512 iterations)'},
+      {playerType: 'mcts-1024', label: 'AI (Type M-1024; Monte Carlo Tree Search with 1024 iterations)'},
+      {playerType: 'mcts-2048', label: 'AI (Type M-2048; Monte Carlo Tree Search with 2048 iterations)'},
+      {playerType: 'mcts-4096', label: 'AI (Type M-4096; Monte Carlo Tree Search with 4096 iterations)'},
+      {playerType: 'pmc-100-m', label: 'AI (Type PM-100/m; Primitive Monte Carlo with 100 iterations for each move)'},
+      {playerType: 'pmc-200-m', label: 'AI (Type PM-200/m; Primitive Monte Carlo with 200 iterations for each move)'},
+      {playerType: 'pmc-1024-e', label: 'AI (Type PM-1024/e; Primitive Monte Carlo with 1024 iterations divided for each move)'}
     ];
     return (
       <select defaultValue={this.props.playerType} onChange={this.props.onChange}>
