@@ -197,6 +197,12 @@ class App extends React.Component {
 class PlayerTypeSelector extends React.Component {
   constructor(props) {
     super(props);
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(e) {
+    this.props.onChange(e.target.value);
   }
 
   render() {
@@ -218,7 +224,7 @@ class PlayerTypeSelector extends React.Component {
       {playerType: 'pmc-1024-e', label: 'AI (Type PM-1024/e; Primitive Monte Carlo with 1024 iterations divided for each move)'}
     ];
     return (
-      <select defaultValue={this.props.playerType} onChange={this.props.onChange}>
+      <select defaultValue={this.props.playerType} onChange={this.onChange}>
         {availablePlayerTypeDetails.map(d =>
           <option key={d.playerType} value={d.playerType}>{d.label}</option>
         )}
