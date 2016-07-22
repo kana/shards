@@ -173,10 +173,19 @@ class App extends React.Component {
   chooseMoveByAI(gameTree, ai) {
     setTimeout(
       () => {
-        const m = ai.findTheBestMove(gameTree);
-        this.shiftToNewGameTree(Othello.force(m.gameTreePromise));
+        const minimumDelayForAI = 500;  // milliseconds
+        const start = Date.now();
+        const move = ai.findTheBestMove(gameTree);
+        const end = Date.now();
+        const delta = end - start;
+        setTimeout(
+          () => {
+            this.shiftToNewGameTree(Othello.force(move.gameTreePromise));
+          },
+          Math.max(minimumDelayForAI - delta, 1)
+        );
       },
-      500
+      1
     )
   }
 
