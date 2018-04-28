@@ -1,1 +1,3 @@
-console.log('Hello')
+import { era } from './data'
+
+console.log('Hello', era())
