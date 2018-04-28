@@ -1,3 +1,7 @@
 import { era } from './data'
 
-console.log('Hello', era())
+function say (name: string|number): void {
+  console.log('Hello', name)
+}
+
+say(era())
