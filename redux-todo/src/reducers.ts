@@ -1,4 +1,4 @@
-import { Action } from './actions'
+import { Action, ActionType } from './actions'
 import { combineReducers } from 'redux'
 
 interface TodoItem {
@@ -6,7 +6,7 @@ interface TodoItem {
   note: string
 }
 
-function todos (state: TodoItem[] = [], action) {
+function todos (state: TodoItem[] = [], action: ActionType) {
   switch (action.type) {
     case Action.ADD_TODO:
       return [

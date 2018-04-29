@@ -4,21 +4,21 @@ export const enum Action {
   TOGGLE_TODO = 'TOGGLE_TODO'
 }
 
-export function addTodo (note: string) {
+export function addTodo (note: string): { type: Action.ADD_TODO, note: string } {
   return {
     type: Action.ADD_TODO,
     note
   }
 }
 
-export function removeTodo (index: number) {
+export function removeTodo (index: number): { type: Action.REMOVE_TODO, index: number } {
   return {
     type: Action.REMOVE_TODO,
     index
   }
 }
 
-export function toggleTodo (index: number) {
+export function toggleTodo (index: number): { type: Action.TOGGLE_TODO, index: number } {
   return {
     type: Action.TOGGLE_TODO,
     index
