@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=production",
+    "start": "webpack-dev-server --open",
     "watch": "webpack --watch --mode=development"
   },
   "author": "kana",
