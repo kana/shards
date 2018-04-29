@@ -5,9 +5,21 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
         test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        loader: 'standard-loader',
+        options: {
+          parser: 'typescript-eslint-parser',
+          plugins: [
+            'typescript'
+          ]
+        }
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: 'ts-loader'
       }
     ]
   },
