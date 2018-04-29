@@ -1,8 +1,20 @@
-import { era } from './data'
+import { addTodo, removeTodo, toggleTodo } from './actions'
+import app from './reducers'
+import { createStore } from 'redux'
 
-function setup (name: string|number): void {
-  const mountPoint = document.getElementsByTagName('body')[0]
-  mountPoint.innerText = name.toString()
-}
+const store = createStore(app)
 
-setup(era())
+console.log(store.getState())
+
+const unsubscribe = store.subscribe(() =>
+  console.log(store.getState())
+)
+
+store.dispatch(addTodo('Alice'))
+store.dispatch(addTodo('Bory'))
+store.dispatch(addTodo('Charlotte'))
+store.dispatch(toggleTodo(1))
+store.dispatch(removeTodo(0))
+store.dispatch(addTodo('Daisy'))
+
+unsubscribe()
