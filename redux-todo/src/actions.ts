@@ -24,3 +24,8 @@ export function toggleTodo (index: number) {
     index
   }
 }
+
+export type ActionType =
+  ReturnType<typeof addTodo> |
+  ReturnType<typeof removeTodo> |
+  ReturnType<typeof toggleTodo>
