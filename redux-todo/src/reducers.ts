@@ -1,4 +1,4 @@
-import { Action, ActionType } from './actions'
+import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO, ActionType } from './actions'
 import { combineReducers } from 'redux'
 
 interface TodoItem {
@@ -8,7 +8,7 @@ interface TodoItem {
 
 function todos (state: TodoItem[] = [], action: ActionType) {
   switch (action.type) {
-    case Action.ADD_TODO:
+    case ADD_TODO:
       return [
         ...state,
         {
@@ -16,9 +16,9 @@ function todos (state: TodoItem[] = [], action: ActionType) {
           note: action.note
         }
       ]
-    case Action.REMOVE_TODO:
+    case REMOVE_TODO:
       return state.filter((_, i) => i !== action.index)
-    case Action.TOGGLE_TODO:
+    case TOGGLE_TODO:
       return state.map((todo, i) => {
         if (i === action.index) {
           return {
