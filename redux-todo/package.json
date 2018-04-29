@@ -19,5 +19,9 @@
     "typescript": "^2.8.3",
     "typescript-eslint-parser": "^15.0.0",
     "webpack-cli": "^2.0.15"
+  },
+  "standard": {
+    "parser": "typescript-eslint-parser",
+    "plugins": [ "typescript" ]
   }
 }
