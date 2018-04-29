@@ -7,6 +7,7 @@ module.exports = {
     contentBase: './dist'
   },
   entry: './src/index.ts',
+  mode: 'development',
   module: {
     rules: [
       {
