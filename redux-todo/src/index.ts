@@ -1,7 +1,8 @@
 import { era } from './data'
 
-function say (name: string|number): void {
-  console.log('Hello', name)
+function setup (name: string|number): void {
+  const mountPoint = document.getElementById('root')
+  mountPoint.innerText = name.toString()
 }
 
-say(era())
+setup(era())
