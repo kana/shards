@@ -14,12 +14,10 @@ module.exports = {
         enforce: 'pre',
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'standard-loader',
+        loader: 'tslint-loader',
         options: {
-          parser: 'typescript-eslint-parser',
-          plugins: [
-            'typescript'
-          ]
+          typeCheck: true,
+          emitErrors: true
         }
       },
       {
