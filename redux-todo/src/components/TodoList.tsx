@@ -19,7 +19,7 @@ class TodoList extends React.PureComponent<Props> {
     return (
       <ul>
         {this.props.todos.map((todo, i) => (
-          <TodoItem key={i} todo={todo}/>
+          <TodoItem key={i} index={i} todo={todo}/>
         ))}
       </ul>
     )

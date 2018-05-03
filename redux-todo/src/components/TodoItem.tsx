@@ -3,6 +3,7 @@ import React from 'react'
 import { Todo } from '../reducers'
 
 interface Props {
+  index: number
   todo: Todo
 }
 
@@ -12,11 +13,15 @@ class TodoItem extends React.PureComponent<Props> {
     return (
       <li>
         <label>
-          <input type='checkbox' checked={todo.done}/>
+          <input type='checkbox' checked={todo.done} onClick={this.handleClick}/>
           {todo.note}
         </label>
       </li>
     )
+  }
+
+  private readonly handleClick = () => {
+    console.log(this.props.index)
   }
 }
 
