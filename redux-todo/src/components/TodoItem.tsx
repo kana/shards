@@ -3,25 +3,24 @@ import React from 'react'
 import { Todo } from '../reducers'
 
 interface Props {
-  index: number
   todo: Todo
+  onClick (): void
 }
 
 class TodoItem extends React.PureComponent<Props> {
   render () {
-    const { todo } = this.props
+    const {
+      todo,
+      onClick
+    } = this.props
     return (
       <li>
         <label>
-          <input type='checkbox' checked={todo.done} onClick={this.handleClick}/>
+          <input type='checkbox' checked={todo.done} onClick={onClick}/>
           {todo.note}
         </label>
       </li>
     )
-  }
-
-  private readonly handleClick = () => {
-    console.log(this.props.index)
   }
 }
 
