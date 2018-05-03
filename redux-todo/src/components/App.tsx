@@ -1,33 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-import { AppState, TodoItem } from '../reducers'
+import TodoList from './TodoList'
 
-interface Props {
-  todos: TodoItem[]
-}
-
-function mapStateToProps (state: AppState): Props {
-  return {
-    todos: state.todos
-  }
-}
+interface Props {}
 
 class App extends React.PureComponent<Props> {
   render () {
     return (
-      <ul>
-        {this.props.todos.map((todo, i) => (
-          <li key={i}>
-            <label>
-              <input type='checkbox' checked={todo.done}/>
-              {todo.note}
-            </label>
-          </li>
-        ))}
-      </ul>
+      <TodoList/>
     )
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default App
