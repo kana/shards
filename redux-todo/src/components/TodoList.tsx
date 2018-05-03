@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { AppState, Todo } from '../reducers'
+import TodoItem from './TodoItem'
 
 interface Props {
   todos: Todo[]
@@ -18,12 +19,7 @@ class TodoList extends React.PureComponent<Props> {
     return (
       <ul>
         {this.props.todos.map((todo, i) => (
-          <li key={i}>
-            <label>
-              <input type='checkbox' checked={todo.done}/>
-              {todo.note}
-            </label>
-          </li>
+          <TodoItem key={i} todo={todo}/>
         ))}
       </ul>
     )
