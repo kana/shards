@@ -1,9 +1,13 @@
 import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO, ActionType } from './actions'
 import { combineReducers } from 'redux'
 
-interface TodoItem {
+export interface TodoItem {
   done: boolean
   note: string
+}
+
+export interface AppState {
+  todos: TodoItem[]
 }
 
 function todos (state: TodoItem[] = [], action: ActionType) {

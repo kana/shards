@@ -6,7 +6,7 @@ module.exports = {
   devServer: {
     contentBase: './dist'
   },
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
   mode: 'development',
   module: {
     rules: [
