@@ -33,7 +33,7 @@ class TodoList extends React.PureComponent<Props> {
     return (
       <ul>
         {todos.map((todo, i) => (
-          <TodoItem key={i} todo={todo} onClick={() => onTodoItemClick(i)}/>
+          <TodoItem key={i} index={i} todo={todo} onClick={onTodoItemClick}/>
         ))}
       </ul>
     )
