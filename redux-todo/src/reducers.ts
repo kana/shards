@@ -1,16 +1,16 @@
 import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO, ActionType } from './actions'
 import { combineReducers } from 'redux'
 
-export interface TodoItem {
+export interface Todo {
   done: boolean
   note: string
 }
 
 export interface AppState {
-  todos: TodoItem[]
+  todos: Todo[]
 }
 
-function todos (state: TodoItem[] = [], action: ActionType) {
+function todos (state: Todo[] = [], action: ActionType) {
   switch (action.type) {
     case ADD_TODO:
       return [

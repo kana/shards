@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { AppState, TodoItem } from '../reducers'
+import { AppState, Todo } from '../reducers'
 
 interface Props {
-  todos: TodoItem[]
+  todos: Todo[]
 }
 
 function mapStateToProps (state: AppState): Props {
