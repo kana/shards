@@ -2,7 +2,7 @@
 
 set -euxo pipefail
 
-curl ./get-latest-tweet-image-url >,latest-image
+curl $(./get-latest-tweet-image-url) >,latest-image
 convert ,latest-image \
   -gravity North -extent 1:1 \
   -rotate 15 -resize 360x360 \
