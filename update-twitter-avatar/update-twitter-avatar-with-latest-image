@@ -10,4 +10,4 @@ convert ,latest-image \
   avatar-base.png \
   -composite \
   ,avatar-generated.png
-./update-twitter-avatar
+./upload-twitter-avatar
