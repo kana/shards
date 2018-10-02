@@ -2,8 +2,17 @@
 
 set -euxo pipefail
 
-curl $(./get-latest-tweet-image-url) >,latest-image
-convert ,latest-image \
+touch ,last-image-url
+./get-latest-tweet-image-url >,current-image-url
+if cmp --quiet ,last-image-url ,current-image-url
+then
+  : 'New image is not uploaded yet'
+  exit
+fi
+cp ,current-image-url ,last-image-url
+
+curl $(<,current-image-url) >,current-image
+convert ,current-image \
   -gravity North -extent 1:1 \
   -rotate 15 -resize 360x360 \
   -gravity East -extent 480x480+140+12 \
