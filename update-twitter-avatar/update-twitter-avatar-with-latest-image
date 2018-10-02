@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+curl ./get-latest-tweet-image-url >,latest-image
+convert ,latest-image \
+  -gravity North -extent 1:1 \
+  -rotate 15 -resize 360x360 \
+  -gravity East -extent 480x480+140+12 \
+  avatar-base.png \
+  -composite \
+  ,avatar-generated.png
+./update-twitter-avatar

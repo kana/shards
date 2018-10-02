@@ -13,7 +13,7 @@ function main () {
     access_token_secret: fs.readFileSync('twitter-access-token-secret').toString().trim(),
   })
 
-  const image = fs.readFileSync(',generated-avatar.png').toString('base64')
+  const image = fs.readFileSync(',avatar-generated.png').toString('base64')
   client.post('account/update_profile_image', { image }, (error) => {
     if (error) {
       console.log(error)
