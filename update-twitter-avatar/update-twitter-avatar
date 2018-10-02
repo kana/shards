@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+const Twitter = require('twitter')
+ 
+main()
+
+function main () {
+  const client = new Twitter({
+    consumer_key: fs.readFileSync('twitter-consumer-key').toString().trim(),
+    consumer_secret: fs.readFileSync('twitter-consumer-secret').toString().trim(),
+    access_token_key: fs.readFileSync('twitter-access-token-key').toString().trim(),
+    access_token_secret: fs.readFileSync('twitter-access-token-secret').toString().trim(),
+  })
+
+  const image = fs.readFileSync(',generated-avatar.png').toString('base64')
+  client.post('account/update_profile_image', { image }, (error) => {
+    if (error) {
+      console.log(error)
+      process.exit(1)
+    }
+  })
+}
