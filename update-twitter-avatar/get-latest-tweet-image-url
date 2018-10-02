@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+const Twitter = require('twitter')
+ 
+main()
+
+function main () {
+  const client = new Twitter({
+    consumer_key: fs.readFileSync('twitter-consumer-key').toString().trim(),
+    consumer_secret: fs.readFileSync('twitter-consumer-secret').toString().trim(),
+    access_token_key: fs.readFileSync('twitter-access-token-key').toString().trim(),
+    access_token_secret: fs.readFileSync('twitter-access-token-secret').toString().trim(),
+  })
+
+  client.get('search/tweets', { q: 'from:kana1 filter:images', count: 1 }, (error, tweets, response) => {
+    console.log(tweets.statuses[0].entities.media[0].media_url_https)
+  })
+}
