@@ -1,0 +1,92 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'json'
+require 'shellwords'
+
+FANBOX_CREATOR_USER_ID = File.read('./fanbox-creator-user-id').chomp()
+FANBOX_COOKIE = File.read('./fanbox-cookie').chomp()
+SLACK_POST_URL = File.read('./slack-post-url').chomp()
+LAST_FANBOX_POST_ID_PATH = './last-fanbox-post-id'
+
+def fetch_fanbox_creator_latest_post()
+  all_words = [
+    'curl',
+    '--silent',
+    '--cookie',
+    FANBOX_COOKIE,
+    "https://www.pixiv.net/ajax/fanbox/creator?userId=#{FANBOX_CREATOR_USER_ID}",
+  ]
+  json = %x{#{Shellwords.join(all_words)}}
+  data = JSON.load(json)
+  if data['error']
+    p data
+    exit 1
+  end
+
+  # data = {
+  #   'body': {
+  #     'post': {
+  #       'items': [
+  #           { ... }, <== post
+  #           ...
+  #       ],
+  #       ...
+  #     }
+  #   },
+  #   ...
+  # }
+  #
+  # post = {
+  #   'id': ...,
+  #   'title': ...,
+  #   ...
+  # }
+  data['body']['post']['items'][0]
+end
+
+def post_to_slack(fanbox_post_title, fanbox_post_url)
+  payload = {
+    text: "<!channel> #{fanbox_post_title} <#{fanbox_post_url}>",
+    unfurl_links: true,
+  }
+  all_words = [
+    'curl',
+    '--silent',
+    '-X',
+    'POST',
+    '--data-urlencode',
+    "payload=#{JSON.dump(payload)}",
+    SLACK_POST_URL,
+  ]
+  %x{#{Shellwords.join(all_words)}}
+end
+
+def last_fanbox_post_id()
+  if File.exists?(LAST_FANBOX_POST_ID_PATH)
+    File.read(LAST_FANBOX_POST_ID_PATH).chomp()
+  else
+    -13 # a value never matches to any post id
+  end
+end
+
+def save_last_fanbox_post_id(id)
+  File.write(LAST_FANBOX_POST_ID_PATH, id)
+end
+
+def main()
+  post = fetch_fanbox_creator_latest_post()
+  if post['id'] == last_fanbox_post_id()
+    puts 'There is no update.'
+    exit
+  end
+
+  save_last_fanbox_post_id(post['id'])
+
+  title = post['title']
+  url = "https://www.pixiv.net/fanbox/creator/#{FANBOX_CREATOR_USER_ID}/post/#{post['id']}"
+  puts "NEW: #{title} #{url}"
+  post_to_slack(title, url)
+end
+
+main()
